@@ -80,11 +80,11 @@ body
     --text-faint:                    var(--light0);
     --text-muted:                    var(--light1);
 
-    --h1-color:                      var(--frost2);
-    --h2-color:                      var(--frost2);
-    --h3-color:                      var(--frost2);
-    --h4-color:                      var(--frost2);
-    --h5-color:                      var(--frost2);
+    --h1-color:                      var(--red);
+    --h2-color:                      var(--yellow);
+    --h3-color:                      var(--green);
+    --h4-color:                      var(--purple);
+    --h5-color:                      var(--frost0);
     --h6-color:                      var(--frost2);
 
     --text-highlight-bg:             var(--frost1);
@@ -230,6 +230,10 @@ body
     --dataview-value-background:     rgba(var(--red_x), 0.3);
 }
 
+/****
+    Tables
+ */
+
 table
 {
     border: 1px solid var(--background-secondary) !important;
@@ -268,6 +272,54 @@ td
 .markdown-rendered tbody tr:nth-child(odd):hover
 {
     background-color: var(--table-row-background-hover) !important;
+}
+
+/****
+    Headers
+ */
+
+.cm-scroller {
+    padding-left: 60px !important;
+}
+
+.markdown-source-view.mod-cm6 .cm-gutters {
+    padding-inline-end: 55px;
+}
+
+.HyperMD-header-1:before, .HyperMD-header-2:before, .HyperMD-header-3:before, .HyperMD-header-4:before, .HyperMD-header-5:before {
+    color: #535E73;
+    display: block;
+    font-size: 70%;
+    left: -50px;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+}
+
+.HyperMD-header-1:before {
+    content: "I";
+    line-height: 33px;
+}
+
+.HyperMD-header-2:before {
+    content: "II";
+    line-height: 28px;
+}
+
+.HyperMD-header-3:before {
+    content: "III";
+    line-height: 22px;
+}
+
+.HyperMD-header-4:before {
+    content: "IV";
+    line-height: 24px;
+}
+
+.HyperMD-header-5:before {
+    content: "V";
+    line-height: 23px;
 }
 
 .markdown-rendered mark
