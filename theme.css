@@ -1,14 +1,16 @@
 :root
 {
-    --dark0_x:  46,52,64; /* #2e3440 */
-    --dark0:    rgb(var(--dark0_x));
-    --dark1_x:  59,66,82; /* #3b4252 */
-    --dark1:    rgb(var(--dark1_x));
-    --dark2_x:  67,76,94; /* #434c5e */
-    --dark2:    rgb(var(--dark2_x));
-    --dark3_x:  76,86,106; /* #4c566a */
-    --dark3:    rgb(var(--dark3_x));
+    /* Darkest to lightest */
+    --dark0_x:  18,18,18;
+    --dark0:    #121212;
+    --dark1_x:  31,31,31;
+    --dark1:    #1f1f1f;
+    --dark2_x:  43,43,43;
+    --dark2:    #2b2b2b;
+    --dark3_x:  60,60,60; /* #4c566a */
+    --dark3:    #3c3c3c;
 
+    /* Darkest to lightest */
     --light0_x: 216,222,233; /* #d8dee9 */
     --light0:   rgb(var(--light0_x));
     --light1_x: 229,233,240; /* #e5e9f0 */
@@ -61,18 +63,16 @@ body
 
     --checkbox-radius:                0;
 
-    /* --list-indent:                    2em; */
-
     --embed-border-left: 6px double var(--interactive-accent);
 }
 
 .theme-dark
 {
-    --background-primary:            var(--dark0);
+    --background-primary:            var(--dark1);
     --background-primary-alt:        var(--dark0);
-    --background-secondary:          var(--dark1);
-    --background-secondary-alt:      var(--dark2);
-    --background-modifier-border:    var(--dark2);
+    --background-secondary:          var(--dark0);
+    --background-secondary-alt:      var(--dark1);
+    --background-modifier-border:    var(--dark3);
 
     --cursor-line-background:        unset;
 
@@ -110,17 +110,18 @@ body
     --checkbox-border-color-hover:   var(--frost0);
     --checklist-done-color:          rgba(var(--light2_x), 0.5);
 
-    --table-header-background:       hsl(220, 16%, 16%);
+    --table-border:                  hsl(220, 10%, 30%);
+    --table-header-background:       hsl(220, 10%, 16%);
     --table-header-background-hover: var(--dark3);
-    --table-row-even-background:     hsl(220, 16%, 20%);
-    --table-row-odd-background:      hsl(220, 16%, 24%);
+    --table-row-even-background:     hsl(220, 7%, 22%);
+    --table-row-odd-background:      hsl(220, 10%, 24%);
     --table-row-background-hover:    var(--dark3);
 
     --text-selection:                rgba(var(--red_x), 0.6);
     --flashing-background:           rgba(var(--red_x), 0.3);
 
     --code-normal:                   var(--frost1);
-    --code-background:               var(--dark1);
+    --code-background:               var(--dark0);
 
     --mermaid-note:                  var(--frost3);
     --mermaid-loopline:              var(--frost1);
@@ -234,28 +235,33 @@ body
     Tables
  */
 
+ /* Tables have an awkward, unavoidable empty paragraph above them; this removes it */
+.cm-line:has(+ .cm-table-widget) {
+    display: none !important;
+}
+
 table
 {
-    border: 1px solid var(--background-secondary) !important;
+    border: 1px solid var(--table-border) !important;
     border-collapse: collapse;
 }
 
 thead
 {
-    border-bottom: 2px solid var(--background-modifier-border) !important;
+    border-bottom: 2px solid var(--table-border) !important;
 }
 
 th
 {
     font-weight: 600 !important;
-    border: 1px solid var(--background-secondary) !important;
+    border: 1px solid var(--table-border) !important;
 }
 
 td
 {
-    border-left: 1px solid var(--background-secondary) !important;
-    border-right: 1px solid var(--background-secondary) !important;
-    border-bottom: 1px solid var(--background-secondary) !important;
+    border-left: 1px solid var(--table-border) !important;
+    border-right: 1px solid var(--table-border) !important;
+    border-bottom: 1px solid var(--table-border) !important;
 }
 
 .markdown-rendered tbody tr:nth-child(even)
@@ -278,16 +284,21 @@ td
     Headers
  */
 
-.cm-scroller {
-    padding-left: 60px !important;
+.view-content > .markdown-source-view.mod-cm6 > .cm-editor > .cm-scroller {
+    padding: 32px 50px 50px 75px !important;
 }
 
 .markdown-source-view.mod-cm6 .cm-gutters {
     padding-inline-end: 55px;
 }
 
+/* When this heading is the first element in the page, no reason to pad above it */
+.HyperMD-header:first-child {
+    padding-top: 0 !important;
+}
+
 .HyperMD-header-1:before, .HyperMD-header-2:before, .HyperMD-header-3:before, .HyperMD-header-4:before, .HyperMD-header-5:before {
-    color: #535E73;
+    color: hsl(219, 11%, 25%);
     display: block;
     font-size: 70%;
     left: -50px;
@@ -320,6 +331,14 @@ td
 .HyperMD-header-5:before {
     content: "V";
     line-height: 23px;
+}
+
+/****
+    Math block
+*/
+.math-block {
+    background-color: var(--code-background);
+    border-radius: var(--code-radius);
 }
 
 .markdown-rendered mark
@@ -442,7 +461,7 @@ pre[class*="language-"]
     fill: var(--mermaid-note) !important;
 }
 
-.mermaid .loopLine,
+.mermaid .loopLine
 {
     stroke: var(--mermaid-loopline) !important;
 }
